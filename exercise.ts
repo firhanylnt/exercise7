@@ -2,20 +2,25 @@
 function checkObject(obj1: any, obj2: any) {
     const keys1 = Object.keys(obj1);
     const keys2 = Object.keys(obj2);
+
+    if(keys1.length !== keys2.length){
+        return false;
+    }
     
     for (let key of keys1) {
         console.log(key);
+        console.log(obj1[key] , obj2[key])
         if (obj1[key] !== obj2[key]) {
             return false;
         }
     }
-
     return true;
 }
 
 console.log(checkObject({ a: 2 }, { a: 1 }));
 console.log(checkObject({ a: "Hello" }, { a: 1 }));
 console.log(checkObject({ a: 1 }, { a: 1 }));
+console.log(checkObject({a: 1, b: 5}, {}));
 
 
 // exercise 2
@@ -24,13 +29,18 @@ function getIntersection(obj1: any, obj2: any) {
 
     for (let key in obj1) {
         if (obj2.hasOwnProperty(key)) {
-            intersection[key] = obj1[key];
+            if(obj2[key] === obj1[key]){
+                console.log(obj1[key],obj2[key])
+                intersection[key] = obj1[key];
+            }
         }
     }
     return intersection;
 }
 
 console.log(getIntersection({ a: 1, b: 2 }, { a: 1, c: 3 }));
+console.log(getIntersection({ a: 1, b: 2 }, { d: 1, a: 3 }));
+console.log(getIntersection({ name: 'firhan', b: 2 }, { name: 'firhan', c: 3 }));
 
 
 // exercise 3
